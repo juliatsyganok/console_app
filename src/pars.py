@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from ls_cd import ls, cd
 from cat_cp_mv_rm import cat, cp, mv, rm
+from grep import grep_
 
 COMMANDS = {
     'ls': ls,
@@ -11,6 +12,7 @@ COMMANDS = {
     'cp': cp,
     'mv': mv,
     'rm': rm,
+    'grep': grep_
 }
 
 
@@ -43,12 +45,12 @@ def shell():
             break
 
         p = case.split()
-        command_name, args = p[0], p[1:]
+        name, args = p[0], p[1:]
     
         
-        if command_name in COMMANDS:
+        if name in COMMANDS:
             try:
-                COMMANDS[command_name](args)
+                COMMANDS[name](args)
             except Exception as e:
                 print(f"ERROR: {str(e)}")
                 logging.error(f"ERROR: {str(e)}")
