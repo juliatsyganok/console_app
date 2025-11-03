@@ -3,7 +3,10 @@ import stat
 import time
 from pathlib import Path
 
-def ls(args):
+def ls(args: list[str]) -> None:
+    """
+    Показывает содержимое дирректории, обрабатывает аргумент -l
+    """
     path = Path.cwd()
     f = False
     for arg in args:
@@ -31,7 +34,10 @@ def ls(args):
             
             print(f"{permissions} {size:8} {mod_time} {item.name}")
 
-def cd(args):
+def cd(args: list[str]) -> None:
+    """
+    Меняет директорию. Поддерживаются .. и ~
+    """
     if not args:
         new = Path.home()
     else:

@@ -17,6 +17,9 @@ COMMANDS = {
 
 
 def log():
+    """
+    логирует команды в файл sheell.log
+    """
     log_dir = "logs"
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
@@ -31,6 +34,10 @@ def log():
     )
 
 def shell():
+    """
+    Омновная функция для обработки ввода пользователя. 
+    Запускает обработку и логирование
+    """
     print("Для выхода введите 'stop'")
     
     while True:

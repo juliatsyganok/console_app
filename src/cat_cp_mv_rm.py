@@ -2,7 +2,10 @@ import os
 import shutil
 from pathlib import Path
 
-def cat(args):
+def cat(args: list[str]) -> None:
+    """
+    Выводит содержимое файла
+    """
     if not args:
         raise ValueError("Нт файла")
     
@@ -17,7 +20,10 @@ def cat(args):
         print(f.read())
 
 
-def cp(args):
+def cp(args: list[str]) -> None:
+    """
+    Копирует файлы и папки
+    """
     if len(args) < 2:
         raise ValueError("Нет пути")
     
@@ -37,7 +43,10 @@ def cp(args):
         raise ValueError("Невозможно выполнить копирование")
 
 
-def mv(args):
+def mv(args: list[str]) -> None:
+    """
+    Перемещает файлы и папки
+    """
     if len(args) < 2:
         raise ValueError("Нет пути")
     if not Path(args[0]).exists():
@@ -46,7 +55,10 @@ def mv(args):
     shutil.move(str(Path(args[0])), str(Path(args[1])))
 
 
-def rm(args):
+def rm(args: list[str]) -> None:
+    """
+    Удаялет файлы и папки
+    """
 
     if not args:
         raise ValueError("Нет пути")

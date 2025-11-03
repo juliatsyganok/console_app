@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 
 
-def file(path, ptr, i_arg):
+def file(path: Path, ptr: str, i_arg: bool) -> None:
+    """
+    Ищет совпадение в файле
+    """
     try:
         with open(path, 'r', encoding='utf-8', errors='ignore') as file:
             for lnum, line in enumerate(file, 1):
@@ -18,7 +21,10 @@ def file(path, ptr, i_arg):
         print("Ошибка чтения файла")
 
 
-def direct(path, ptr, rec, i_arg):
+def direct(path: Path, ptr: str, rec: bool, i_arg: bool) -> None:
+    """
+    Рекурсивно ищет совпадения по файлам в папке
+    """
     try:
         for item in path.iterdir():
             if item.is_file():
@@ -30,7 +36,7 @@ def direct(path, ptr, rec, i_arg):
 
 
 
-def grep_(args):
+def grep_(args: list[str]) -> None:
     if len(args) < 2:
         raise ValueError("Неправильный ввод команды")
     
