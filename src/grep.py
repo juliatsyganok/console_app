@@ -40,13 +40,13 @@ def grep_(args: list[str]) -> None:
     if len(args) < 2:
         raise ValueError("Неправильный ввод команды")
 
-    non_option_args = [arg for arg in args if not arg.startswith('-')]
+    args = [arg for arg in args if not arg.startswith('-')]
     
-    if len(non_option_args) < 2:
+    if len(args) < 2:
         raise ValueError("Неправильный ввод команды")
     
-    ptr = non_option_args[0] 
-    path_str = non_option_args[1] 
+    ptr = args[0] 
+    path_str = args[1] 
     rec = '-r' in args
     i_arg = '-i' in args
 
