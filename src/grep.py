@@ -39,22 +39,27 @@ def direct(path: Path, ptr: str, rec: bool, i_arg: bool) -> None:
 def grep_(args: list[str]) -> None:
     if len(args) < 2:
         raise ValueError("Неправильный ввод команды")
+
+    non_option_args = [arg for arg in args if not arg.startswith('-')]
     
-    ptr = args[0]
-    path = args[1]
+    if len(non_option_args) < 2:
+        raise ValueError("Неправильный ввод команды")
+    
+    ptr = non_option_args[0] 
+    path_str = non_option_args[1] 
     rec = '-r' in args
     i_arg = '-i' in args
-    
-    path = Path(path)
-    
+
+    path = Path(path_str)
+
     if not path.exists():
         raise FileNotFoundError("Нет такого пути")
-  
+
     if i_arg:
         s_ptr = ptr.lower()
     else:
         s_ptr = ptr
-    
+
     if path.is_file():
         file(path, s_ptr, i_arg)
     elif path.is_dir():
