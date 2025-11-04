@@ -56,29 +56,29 @@ def mv(args: list[str]) -> None:
 
 
 def rm(args: list[str]) -> None:
-    """
-    Удаялет файлы и папки
-    """
-
+    """Удаляет файлы и папки"""
     if not args:
         raise ValueError("Нет пути")
 
     dop = [x for x in args if x != '-r']
-    
-    tg = Path(dop[0])
+    path_arg = dop[0]
 
-    if str(tg) in ['/', '..']:
+    if path_arg in ['/', '..']:
         raise PermissionError("Нельзя удалить корневой каталог")
-    
+
+    tg = Path(path_arg)
+
     if not tg.exists():
         raise FileNotFoundError("Не существует")
-    
+
     if tg.is_file():
         os.remove(tg)
     elif tg.is_dir():
-        confirm = input("Удалить Y/n?")
-        if confirm.lower() == 'y':
-            shutil.rmtree(tg)
-
+        if '-r' in args:
+            confirm = input("Удалить Y/n: ")
+            if confirm.lower() == 'y':
+                shutil.rmtree(tg)
+        else:
+            raise ValueError("Для удаления каталога используйте -r")
     else:
         raise ValueError("Невозможно выполнить удаление")
